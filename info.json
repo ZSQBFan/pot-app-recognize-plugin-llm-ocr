@@ -2,8 +2,8 @@
   "id": "plugin.com.pot-app.llm-ocr",
   "plugin_type": "recognize",
   "icon": "favicon.png",
-  "display": "QwenOCR",
-  "homepage": "https://github.com/SunXin121/pot-app-recognize-plugin-qwen-ocr",
+  "display": "LLM OCR",
+  "homepage": "https://github.com/ZSQBFan/pot-app-recognize-plugin-llm-ocr",
   "needs": [
     {
       "key": "apiKey",
@@ -22,7 +22,7 @@
     },
     {
       "key": "model",
-      "display": "模型[可选] (例如: qwen-max-latest)",
+      "display": "模型[可选] (例如: qwen3-vl-flash)",
       "type": "input"
     }
   ],
