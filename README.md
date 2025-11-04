@@ -33,3 +33,7 @@
 
 ## 开始使用
 保存配置！现在，当你使用 Pot 的截图 OCR 功能时，插件会自动调用你配置的阿里云模型来为你识别文字。
+
+## 鸣谢
+- [Pot](https://pot-app.com/)
+- 这个项目的初始代码和灵感大量来源于[Pot-APP Qwen OCR 插件](https://github.com/SunXin121/pot-app-recognize-plugin-qwen-ocr)
