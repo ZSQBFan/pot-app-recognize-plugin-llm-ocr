@@ -1,71 +1,35 @@
-# Pot-App 文字识别插件模板仓库 (以 [OCR Space](https://ocr.space/) 为例)
+# Pot-APP LLM OCR 插件
 
-### 此仓库为模板仓库，编写插件时可以直接由此仓库创建插件仓库
+### 一个使用视觉理解大模型进行文字识别的插件
 
-## 插件编写指南
+## 🚀 使用指南
 
-### 1. 插件仓库创建
+本插件是一个基于大型语言模型（LLM）的 OCR 识别插件，它依赖于阿里云的灵积（DashScope）模型服务来实现强大的视觉识别能力。
 
-- 以此仓库为模板创建一个新的仓库
-- 仓库名为 `pot-app-recognize-plugin-<插件名>`，例如 `pot-app-recognize-plugin-ocrspace`
+在使用前，你必须拥有一个阿里云账户（或者其他拥有视觉识别大模型的平台）并完成以下配置，此后教程以阿里千问qwen模型为例。
 
-### 2. 插件信息配置
+## 安装步骤
 
-编辑 `info.json` 文件，修改以下字段：
+### 步骤一：开通阿里云百炼平台服务
+- 访问：[阿里云百炼平台](https://bailian.console.aliyun.com/?spm=5176.12818093_47.resourceCenter.5.50272cc9dJ31xs&tab=doc#/doc/?type=model&url=2840915)
+- 开通相关服务并获取 API Key
 
-- `id`：插件唯一 id，必须以`[plugin]`开头，例如 `[plugin].com.pot-app.ocrspace`
-- `display`: 插件显示名称，例如 `OCR Space`
-- `homepage`: 插件主页，填写你的仓库地址即可，例如 `https://github.com/pot-app/pot-app-recognize-plugin-template`
-- `icon`: 插件图标，填写当前目录下的图标名称，例如 `icon.png`
-- `needs`: 插件依赖，一个数组，每个依赖为一个对象，包含以下字段：
-  - `key`: 依赖 key，对应该项依赖在配置文件中的名称，例如 `apikey`
-  - `display`: 依赖显示名称，对应用户显示的名称，例如 `API Key`
-  - `type`: 组件类型 `input` | `select`
-  - `options`: 选项列表(仅 select 组件需要)，例如 `{"engine_a":"Engina A","engine_b":"Engina B"}`
-- `language`: 插件支持的语言映射，将 pot 的语言代码和插件发送请求时的语言代码一一对应
+### 步骤二：下载并安装软件
+1. 下载并安装 [Pot](https://pot-app.com/)
+2. 从 releases 下载插件
+3. 打开 Pot → 服务设置 → 文字识别 → 添加外部插件 → 安装外部插件
+4. 选择下载得到的 `plugin.com.pot-app.llm-ocr.potext` 文件
 
-### 3. 插件编写/编译
+### 步骤三：配置 Pot 插件
+打开 Pot 软件的插件设置，找到此插件，并填写以下字段：
 
-编辑 `main.js` 实现 `recognize` 函数
+| 配置项 | 说明 |
+|--------|------|
+| **配置名称** | 给这个配置起一个你喜欢的名字，例如"我的阿里 OCR" |
+| **API Key** | 粘贴你在步骤一中复制的 `sk-` 开头的密钥 |
+| **API 接入点** | 填写 OpenAI 兼容模式接入点：<br>`https://dashscope.aliyuncs.com/compatible-mode/v1` |
+| **Prompt[可选]** | 给 AI 的指令，用于指导它如何处理图片。留空则调用默认的prompt |
+| **模型[可选]** | 填写你在步骤一中开通的视觉模型名称。留空则调用默认的 `qwen3-vl-flash` |
 
-#### Input parameters
-
-```javascript
-// config: config map
-// detect: detected source language
-// setResult: function to set result text
-// utils: some tools
-//     http: tauri http module
-//     readBinaryFile: function
-//     readTextFile: function
-//     Database: tauri Database class
-//     CryptoJS: CryptoJS module
-//     cacheDir: cache dir path
-//     pluginDir: current plugin dir 
-//     osType: "Windows_NT" | "Darwin" | "Linux"
-async function recognize(base64, lang, options) {
-  const { config, utils } = options;
-  const { http, readBinaryFile, readTextFile, Database, CryptoJS, run, cacheDir, pluginDir, osType } = utils;
-  const { fetch, Body } = http;
-}
-```
-
-#### Return value
-
-```javascript
-return "result";
-```
-
-### 4. 打包 pot 插件
-
-1. 将`main.js`文件和`info.json`以及图标文件压缩为 zip 文件。
-
-2. 将文件重命名为`<插件id>.potext`，例如`plugin.com.pot-app.ocrspace.potext`,即可得到 pot 需要的插件。
-
-## 自动编译打包
-
-本仓库配置了 Github Actions，可以实现推送后自动编译打包插件。
-
-每次将仓库推送到 GitHub 之后 actions 会自动运行，将打包好的插件上传到 artifact，在 actions 页面可以下载
-
-每次提交 Tag 之后，actions 会自动运行，将打包好的插件上传到 release，在 release 页面可以下载打包好的插件
+## 开始使用
+保存配置！现在，当你使用 Pot 的截图 OCR 功能时，插件会自动调用你配置的阿里云模型来为你识别文字。
