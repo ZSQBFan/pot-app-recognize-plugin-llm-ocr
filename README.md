@@ -16,7 +16,7 @@
 
 ### 步骤二：下载并安装软件
 1. 下载并安装 [Pot](https://pot-app.com/)
-2. 从 releases 下载插件
+2. 从右侧 releases 区域下载插件
 3. 打开 Pot → 服务设置 → 文字识别 → 添加外部插件 → 安装外部插件
 4. 选择下载得到的 `plugin.com.pot-app.llm-ocr.potext` 文件
 
